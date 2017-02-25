@@ -2,36 +2,77 @@
 
 /**
  * @ngdoc overview
- * @name angularHerokuTestApp
+ * @name imageCleaningApp
  * @description
- * # angularHerokuTestApp
+ * # imageCleaningApp
  *
  * Main module of the application.
  */
 angular
-  .module('angularHerokuTestApp', [
+  .module('imageCleaningApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.router',
+    'toaster',
+    'oc.lazyLoad',
+    'datatables',
+    'datatables.bootstrap',
+    'rzModule',
+    'angularLazyImg'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
+  .config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+    $urlRouterProvider.otherwise('/home');
+
+    $stateProvider
+      .state('home', {
+        url: '/home',
+        templateUrl: 'views/admin/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'main'
+        resolve: {
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/controllers/admin/main.js'
+              ]
+            })
+          }
+        }
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .state('testUser', {
+        url: '/testUser',
+        templateUrl: 'views/admin/testUser.html',
+        controller: 'testUserCtrl',
+        resolve: {
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/controllers/admin/testUserCtrl.js',
+                'models/testUserModel.js'
+              ]
+            })
+          }
+        }
       })
-      .otherwise({
-        redirectTo: '/'
-      });
-  }).config(['$locationProvider', function($locationProvider) {
-    $locationProvider.hashPrefix('');
-  }]);
+      .state('images', {
+        url: '/images',
+        templateUrl: 'views/admin/images.html',
+        controller: 'imagesCtrl',
+        resolve: {
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/controllers/admin/imagesCtrl.js',
+                'models/imagesModel.js'
+              ]
+            })
+          }
+        }
+      })
+  });

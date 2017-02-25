@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularHerokuTestApp.controller:MainCtrl
+ * @name imageCleaningApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the angularHerokuTestApp
+ * Controller of the imageCleaningApp
  */
-angular.module('angularHerokuTestApp')
+angular.module('imageCleaningApp')
   .controller('MainCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
