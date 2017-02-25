@@ -31,48 +31,16 @@ angular
       .state('home', {
         url: '/home',
         templateUrl: 'views/admin/main.html',
-        controller: 'MainCtrl',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/controllers/admin/main.js'
-              ]
-            })
-          }
-        }
+        controller: 'MainCtrl'
       })
       .state('testUser', {
         url: '/testUser',
         templateUrl: 'views/admin/testUser.html',
-        controller: 'testUserCtrl',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/controllers/admin/testUserCtrl.js',
-                'models/testUserModel.js'
-              ]
-            })
-          }
-        }
+        controller: 'testUserCtrl'
       })
       .state('images', {
         url: '/images',
         templateUrl: 'views/admin/images.html',
-        controller: 'imagesCtrl',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/controllers/admin/imagesCtrl.js',
-                'models/imagesModel.js'
-              ]
-            })
-          }
-        }
+        controller: 'imagesCtrl'
       })
   });
